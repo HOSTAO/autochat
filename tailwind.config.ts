@@ -2,75 +2,47 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0fdf9',
-          100: '#d2f7eb',
-          200: '#a5efd8',
-          300: '#6ae0bf',
-          400: '#30c9a2',
-          500: '#0fb784',
-          600: '#00a572',
-          700: '#008c61',
-          800: '#00714f',
-          900: '#005a3f',
+        brand: {
+          DEFAULT: '#25D366',
+          dark: '#1da851',
+          light: '#2ee67a',
         },
-        accent: {
-          50: '#e6f7ff',
-          100: '#bae7ff',
-          200: '#91d5ff',
-          300: '#69c0ff',
-          400: '#40a9ff',
-          500: '#1890ff',
-          600: '#096dd9',
-          700: '#0050b3',
-          800: '#003a8c',
-          900: '#002766',
-        }
+        dark: {
+          DEFAULT: '#0B0F14',
+          card: '#111827',
+          700: '#1F2937',
+          600: '#374151',
+        },
+        accent: '#7C3AED',
+      },
+      fontFamily: {
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       animation: {
-        'gradient-x': 'gradient-x 15s ease infinite',
-        'gradient-y': 'gradient-y 15s ease infinite',
-        'gradient-xy': 'gradient-xy 15s ease infinite',
+        'fade-in': 'fadeIn 0.6s ease-out forwards',
+        'slide-up': 'slideUp 0.6s ease-out forwards',
+        'glow-pulse': 'glowPulse 3s ease-in-out infinite',
       },
       keyframes: {
-        'gradient-y': {
-          '0%, 100%': {
-            'background-size':'400% 400%',
-            'background-position': 'center top'
-          },
-          '50%': {
-            'background-size':'200% 200%',
-            'background-position': 'center center'
-          }
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-        'gradient-x': {
-          '0%, 100%': {
-            'background-size':'200% 200%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size':'200% 200%',
-            'background-position': 'right center'
-          }
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'gradient-xy': {
-          '0%, 100%': {
-            'background-size':'400% 400%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size':'200% 200%',
-            'background-position': 'right center'
-          }
-        }
-      }
+        glowPulse: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(37,211,102,0.2)' },
+          '50%': { boxShadow: '0 0 40px rgba(37,211,102,0.4)' },
+        },
+      },
     },
   },
   plugins: [],

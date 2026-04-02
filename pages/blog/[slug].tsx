@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Nav from '../../components/Nav'
 import Footer from '../../components/Footer'
-import { useIsMobile } from '../../hooks/useIsMobile'
 
 interface Post {
   id: number
@@ -20,29 +19,22 @@ interface Props {
   related: { title: string; slug: string }[]
 }
 
-const PRIMARY = '#25D366'
-const BG = '#0A0E1A'
-const TEXT = '#F9FAFB'
-const MUTED = '#9CA3AF'
-
 export default function BlogPost({ post, related }: Props) {
-  const isMobile = useIsMobile()
-  const S = { maxWidth: 800, margin: '0 auto' }
   const dateStr = new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 
   const renderContent = (text: string) => {
     const paragraphs = text.split('\n\n').filter(p => p.trim())
     return paragraphs.map((para, i) => {
       const t = para.trim()
-      if (t.startsWith('#### ')) return <h4 key={i} style={{ fontSize: 18, fontWeight: 700, color: TEXT, margin: '28px 0 12px', lineHeight: 1.4 }}>{t.slice(5)}</h4>
-      if (t.startsWith('### ')) return <h3 key={i} style={{ fontSize: 22, fontWeight: 700, color: TEXT, margin: '32px 0 12px', lineHeight: 1.4 }}>{t.slice(4)}</h3>
-      if (t.startsWith('## ')) return <h2 key={i} style={{ fontSize: 26, fontWeight: 800, color: TEXT, margin: '40px 0 14px', lineHeight: 1.3 }}>{t.slice(3)}</h2>
-      if (t.startsWith('# ')) return <h1 key={i} style={{ fontSize: 32, fontWeight: 900, color: TEXT, margin: '40px 0 16px', lineHeight: 1.2 }}>{t.slice(2)}</h1>
+      if (t.startsWith('#### ')) return <h4 key={i} className="text-lg font-bold text-gray-50 mt-7 mb-3 leading-snug">{t.slice(5)}</h4>
+      if (t.startsWith('### ')) return <h3 key={i} className="text-[22px] font-bold text-gray-50 mt-8 mb-3 leading-snug">{t.slice(4)}</h3>
+      if (t.startsWith('## ')) return <h2 key={i} className="text-[26px] font-extrabold text-gray-50 mt-10 mb-3.5 leading-tight">{t.slice(3)}</h2>
+      if (t.startsWith('# ')) return <h1 key={i} className="text-[32px] font-black text-gray-50 mt-10 mb-4 leading-tight">{t.slice(2)}</h1>
       if (t.startsWith('**') && t.endsWith('**')) {
-        return <p key={i} style={{ fontSize: 16, color: TEXT, fontWeight: 700, lineHeight: 1.8, marginBottom: 12 }}>{t.slice(2, -2)}</p>
+        return <p key={i} className="text-base text-gray-50 font-bold leading-relaxed mb-3">{t.slice(2, -2)}</p>
       }
       if (t.length < 5) return null
-      return <p key={i} style={{ fontSize: 16, color: MUTED, lineHeight: 1.85, marginBottom: 20 }}>{t}</p>
+      return <p key={i} className="text-base text-gray-400 leading-[1.85] mb-5">{t}</p>
     })
   }
 
@@ -59,36 +51,36 @@ export default function BlogPost({ post, related }: Props) {
         <meta property="og:url" content={`https://autochat.in/blog/${post.slug}`} />
         <meta property="og:type" content="article" />
       </Head>
-      <div style={{ background: BG, minHeight: '100vh', color: TEXT }}>
+      <div className="bg-[#0A0E1A] min-h-screen text-gray-50">
         <Nav />
-        <main style={{ padding: isMobile ? '32px 20px' : '60px 24px' }}>
-          <div style={S}>
-            <Link href="/blog" style={{ color: PRIMARY, fontSize: 14, textDecoration: 'none', display: 'inline-block', marginBottom: 32 }}>
+        <main className="px-5 py-8 md:px-6 md:py-16">
+          <div className="max-w-[800px] mx-auto">
+            <Link href="/blog" className="text-brand text-sm no-underline inline-block mb-8 hover:underline">
               ← Back to Blog
             </Link>
-            <div style={{ marginBottom: 12 }}>
-              <span style={{ background: `${PRIMARY}20`, color: PRIMARY, fontSize: 13, fontWeight: 600, padding: '4px 12px', borderRadius: 20 }}>
+            <div className="mb-3">
+              <span className="bg-brand/[0.13] text-brand text-[13px] font-semibold px-3 py-1 rounded-full">
                 {post.categories?.[0] || 'WhatsApp Automation'}
               </span>
             </div>
-            <h1 style={{ fontSize: isMobile ? 28 : 40, fontWeight: 900, color: TEXT, lineHeight: 1.2, margin: '16px 0 12px' }}>
+            <h1 className="text-[28px] md:text-[40px] font-black text-gray-50 leading-tight mt-4 mb-3">
               {post.title}
             </h1>
-            <p style={{ color: MUTED, fontSize: 14, marginBottom: 40 }}>
+            <p className="text-gray-400 text-sm mb-10">
               AutoChat Team · {dateStr}
             </p>
-            <div style={{ fontSize: 18, color: MUTED, fontStyle: 'italic', borderLeft: `3px solid ${PRIMARY}`, paddingLeft: 20, marginBottom: 40, lineHeight: 1.7 }}>
+            <div className="text-lg text-gray-400 italic border-l-[3px] border-brand pl-5 mb-10 leading-relaxed">
               {post.excerpt}
             </div>
             <article>
               {renderContent(post.content)}
             </article>
             {related.length > 0 && (
-              <div style={{ marginTop: 64, borderTop: '1px solid #1F2937', paddingTop: 40 }}>
-                <h3 style={{ fontSize: 20, fontWeight: 700, color: TEXT, marginBottom: 24 }}>Related Articles</h3>
-                <div style={{ display: 'grid', gap: 16 }}>
+              <div className="mt-16 border-t border-gray-800 pt-10">
+                <h3 className="text-xl font-bold text-gray-50 mb-6">Related Articles</h3>
+                <div className="grid gap-4">
                   {related.map(r => (
-                    <Link key={r.slug} href={`/blog/${r.slug}`} style={{ color: PRIMARY, textDecoration: 'none', fontSize: 15 }}>
+                    <Link key={r.slug} href={`/blog/${r.slug}`} className="text-brand no-underline text-[15px] hover:underline">
                       → {r.title}
                     </Link>
                   ))}

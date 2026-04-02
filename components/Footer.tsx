@@ -1,26 +1,24 @@
 import Link from 'next/link'
-import { useIsMobile } from '../hooks/useIsMobile'
 
 export default function Footer() {
-  const isMobile = useIsMobile()
-
   return (
-    <footer style={{ background: '#0B0F14', borderTop: '1px solid rgba(255,255,255,0.07)', padding: '60px 24px 32px' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+    <footer className="bg-dark border-t border-white/[0.07]">
+      {/* Main Footer */}
+      <div className="max-w-[1200px] mx-auto px-6 pt-16 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           {/* Brand */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 36, height: 36, background: '#25D366', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>💬</div>
-              <span style={{ color: '#F9FAFB', fontWeight: 800, fontSize: 20 }}>AutoChat</span>
+          <div className="md:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 bg-brand rounded-xl flex items-center justify-center text-lg shadow-[0_0_12px_rgba(37,211,102,0.3)]">
+                💬
+              </div>
+              <span className="text-gray-50 font-extrabold text-xl">AutoChat</span>
             </div>
-            <p style={{ color: '#9CA3AF', fontSize: 14, lineHeight: 1.7, maxWidth: 320, marginBottom: 16 }}>
-              Product From Hostao
+            <p className="text-gray-500 text-[13px] font-medium mb-2">A Product of Hostao LLC</p>
+            <p className="text-gray-400 text-sm leading-relaxed max-w-[300px] mb-6">
+              AI-Driven WhatsApp Business Automation — Chatbots, Bulk Messaging, Team Inbox, eCommerce & more.
             </p>
-            <p style={{ color: '#9CA3AF', fontSize: 13, lineHeight: 1.7, maxWidth: 320, marginBottom: 20 }}>
-              Chatbots, Bulk Messaging, Team Inbox, Integrations — Autochat offers all WhatsApp Business tools in one place.
-            </p>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <div className="flex gap-2.5 flex-wrap">
               {[
                 ['Facebook', 'https://facebook.com/AutoChat.in', 'f'],
                 ['X', 'https://x.com/AutoChaat', '𝕏'],
@@ -28,19 +26,18 @@ export default function Footer() {
                 ['Instagram', 'https://www.instagram.com/autochatofficial/', '📷'],
                 ['YouTube', 'https://www.youtube.com/@AutoMationTool', '▶'],
               ].map(([label, href, icon]) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
-                  width: 36, height: 36, background: 'rgba(255,255,255,0.07)', borderRadius: 8,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9CA3AF',
-                  textDecoration: 'none', fontSize: 13, fontWeight: 700,
-                }}>{icon}</a>
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                  className="w-9 h-9 bg-white/[0.06] hover:bg-brand/20 hover:border-brand/30 border border-white/[0.08] rounded-lg flex items-center justify-center text-gray-400 hover:text-brand no-underline text-[13px] font-bold transition-all duration-200">
+                  {icon}
+                </a>
               ))}
             </div>
           </div>
 
           {/* Product Links */}
           <div>
-            <h4 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 15, marginBottom: 16, marginTop: 0 }}>Product</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <h4 className="text-gray-50 font-bold text-[15px] mb-5">Product</h4>
+            <div className="flex flex-col gap-3">
               {[
                 ['360 eCommerce', 'https://ecommerce.createautochat.com'],
                 ['Our Pricing', '/pricing'],
@@ -50,69 +47,76 @@ export default function Footer() {
                 ['API & WebHooks', 'https://createautochat.com/api-webhooks'],
                 ['OpenAI Chat', '/chatgpt'],
               ].map(([label, href]) => (
-                <a key={label} href={href} style={{ color: '#9CA3AF', textDecoration: 'none', fontSize: 14 }}
+                <a key={label} href={href}
+                  className="text-gray-400 hover:text-gray-200 no-underline text-sm transition-colors duration-200"
                   target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >{label}</a>
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                  {label}
+                </a>
               ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 15, marginBottom: 16, marginTop: 0 }}>Quick Links</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <h4 className="text-gray-50 font-bold text-[15px] mb-5">Resources</h4>
+            <div className="flex flex-col gap-3">
               {[
                 ['Meta Official Pricing', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQi42DRCWBMZXNbRnONcFIeWHjN0lmFdjJxP6HOgi5HUIut1ijrKhIKybXaRkt7hH9Z4GfkCbx_LFRs/pubhtml?gid=0&single=true'],
                 ['Meta Pricing Examples', 'https://drive.google.com/file/d/1pF0xnYIU6bF3bdHI5I7ZPhlpPdNNxhRd/view?usp=sharing'],
                 ['Coupon Code', '/coupon'],
-                ['Autochat VS Wati', 'https://createautochat.com/detailed-comparison-autochat-vs-wati/'],
-                ['Autochat VS AiSensy', 'https://createautochat.com/autochat-vs-aisensy-best-aisensy-alternative/'],
-                ['Autochat VS Interakt', 'https://createautochat.com/autochat-vs-interakt/'],
-                ['Autochat VS Gallabox', 'https://createautochat.com/autochat-vs-gallabox-the-best-gallabox-alternative/'],
-                ['Autochat VS QuickReply.ai', 'https://createautochat.com/autochat-vs-quickreply-ai-best-quickreply-ai-alternative2024/'],
+                ['AutoChat VS Wati', 'https://createautochat.com/detailed-comparison-autochat-vs-wati/'],
+                ['AutoChat VS AiSensy', 'https://createautochat.com/autochat-vs-aisensy-best-aisensy-alternative/'],
+                ['AutoChat VS Interakt', 'https://createautochat.com/autochat-vs-interakt/'],
+                ['AutoChat VS Gallabox', 'https://createautochat.com/autochat-vs-gallabox-the-best-gallabox-alternative/'],
               ].map(([label, href]) => (
-                <a key={label} href={href} style={{ color: '#9CA3AF', textDecoration: 'none', fontSize: 13 }}
+                <a key={label} href={href}
+                  className="text-gray-400 hover:text-gray-200 no-underline text-[13px] transition-colors duration-200"
                   target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >{label}</a>
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                  {label}
+                </a>
               ))}
             </div>
           </div>
 
-          {/* Useful Links */}
+          {/* Useful Links + CTA */}
           <div>
-            <h4 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 15, marginBottom: 16, marginTop: 0 }}>Useful Links</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <h4 className="text-gray-50 font-bold text-[15px] mb-5">Company</h4>
+            <div className="flex flex-col gap-3 mb-7">
               {[
+                ['About Us', '/about'],
+                ['Contact Us', '/contact'],
                 ['Terms & Conditions', '/terms-of-service'],
                 ['Privacy Policy', '/privacy-policy'],
                 ['Refund Policy', 'https://createautochat.com/refund-policy'],
-                ['Contact Us', '/contact'],
+                ['Support', '/support'],
               ].map(([label, href]) => (
-                <a key={label} href={href} style={{ color: '#9CA3AF', textDecoration: 'none', fontSize: 14 }}
+                <a key={label} href={href}
+                  className="text-gray-400 hover:text-gray-200 no-underline text-sm transition-colors duration-200"
                   target={href.startsWith('http') ? '_blank' : undefined}
-                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >{label}</a>
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                  {label}
+                </a>
               ))}
             </div>
-            <div style={{ marginTop: 24 }}>
-              <a href="https://app.autochat.in/register" style={{
-                display: 'inline-block', padding: '10px 20px', background: '#25D366',
-                color: '#fff', textDecoration: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, textAlign: 'center',
-              }}>Sign Up Free</a>
-            </div>
+            <a href="https://app.autochat.in/register"
+              className="btn-primary-sm">
+              Sign Up Free →
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* Bottom */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 24, display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: 12 }}>
-          <p style={{ color: '#9CA3AF', fontSize: 13, margin: 0 }}>
-            Copyright © {new Date().getFullYear()} <a href="https://hostao.com" target="_blank" rel="noopener noreferrer" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Hostao LLC</a>. All Rights Reserved
+      {/* Bottom Bar */}
+      <div className="border-t border-white/[0.07]">
+        <div className="max-w-[1200px] mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-[13px]">
+            © {new Date().getFullYear()} <a href="https://hostao.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-300 no-underline transition-colors duration-200">Hostao LLC</a>. All Rights Reserved.
           </p>
-          <div style={{ display: 'flex', gap: 20 }}>
-            <Link href="/privacy-policy" style={{ color: '#9CA3AF', textDecoration: 'none', fontSize: 13 }}>Privacy Policy</Link>
-            <Link href="/terms-of-service" style={{ color: '#9CA3AF', textDecoration: 'none', fontSize: 13 }}>Terms & Conditions</Link>
+          <div className="flex gap-6">
+            <Link href="/privacy-policy" className="text-gray-500 hover:text-gray-300 no-underline text-[13px] transition-colors duration-200">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="text-gray-500 hover:text-gray-300 no-underline text-[13px] transition-colors duration-200">Terms & Conditions</Link>
           </div>
         </div>
       </div>

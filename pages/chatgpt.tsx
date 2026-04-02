@@ -1,135 +1,113 @@
 import Head from 'next/head'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { useIsMobile } from '../hooks/useIsMobile'
-
-const aiFeatures = [
-  { icon: '🧠', title: 'AI Chat Using Your Business Data', desc: 'Train AutoChat\'s AI on your FAQs, product catalog, policies, and knowledge base. Your bot answers with YOUR business knowledge, not generic responses.' },
-  { icon: '🎙️', title: 'Text & Voice Conversation AI', desc: 'Customers can interact via both text and voice messages. Our AI transcribes and understands voice messages automatically.' },
-  { icon: '⚡', title: 'GPT-4 Integration', desc: 'Powered by OpenAI\'s most advanced GPT-4 model for human-like, context-aware conversations that actually convert.' },
-  { icon: '📚', title: 'Train on Your Own Data', desc: 'Upload documents, PDFs, URLs, or product data. The AI learns your business instantly and stays up to date.' },
-  { icon: '🎯', title: 'Auto-Respond Intelligently', desc: 'Handle unlimited conversations simultaneously with intelligent routing — escalate to human agents only when truly needed.' },
-]
-
-const useCases = [
-  { icon: '🎧', title: 'Customer Support', desc: 'Resolve 80% of support queries instantly without human intervention. Available 24/7/365.' },
-  { icon: '🎯', title: 'Lead Qualification', desc: 'Ask the right questions, score leads, and route high-intent prospects directly to your sales team.' },
-  { icon: '❓', title: 'FAQ Bot', desc: 'Answer product questions, pricing, shipping, returns — anything customers ask, answered instantly.' },
-  { icon: '💰', title: 'Sales Assistant', desc: 'Recommend products, share offers, collect orders, and process payments — all automated inside WhatsApp.' },
-]
 
 export default function ChatGPT() {
-  const isMobile = useIsMobile()
-  const W = { maxWidth: 1200, margin: '0 auto', padding: '0 24px' }
-
   return (
     <>
       <Head>
-        <title>ChatGPT AI WhatsApp Chatbot | AutoChat — WhatsApp Business Automation</title>
-        <meta name="description" content="Integrate ChatGPT AI into your WhatsApp chatbot. GPT-4 powered responses, voice AI, business data training, and intelligent auto-replies with AutoChat." />
+        <title>ChatGPT AI for WhatsApp | AutoChat — AI-Powered Chatbot</title>
+        <meta name="description" content="Integrate ChatGPT AI with your WhatsApp business. Intelligent automated conversations, smart lead qualification, and 24/7 AI-powered customer support." />
         <link rel="canonical" href="https://autochat.in/chatgpt" />
-        <meta property="og:title" content="ChatGPT AI WhatsApp Chatbot | AutoChat" />
-        <meta property="og:description" content="AI-powered WhatsApp chatbot with GPT-4 integration. Train on your data, respond intelligently 24/7." />
-        <meta property="og:url" content="https://autochat.in/chatgpt" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Nav />
 
-      {/* Hero */}
-      <section style={{ background: 'linear-gradient(135deg, #0B0F14 0%, #1a0b2e 50%, #0B0F14 100%)', padding: isMobile ? '72px 24px 60px' : '100px 24px 80px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 820, margin: '0 auto' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(124,58,237,0.15)', border: '1px solid rgba(124,58,237,0.3)', borderRadius: 24, padding: '6px 16px', marginBottom: 28 }}>
-            <span style={{ fontSize: 14, color: '#7C3AED', fontWeight: 600 }}>✦ Powered by GPT-4</span>
+      <section className="hero-gradient-purple py-20 px-6 md:py-28 text-center">
+        <div className="max-w-[700px] mx-auto">
+          <div className="badge-purple mb-5">
+            <span>🧠 AI-Powered</span>
           </div>
-          <h1 style={{ fontSize: isMobile ? 32 : 54, fontWeight: 900, color: '#F9FAFB', lineHeight: 1.1, letterSpacing: '-1.5px', marginBottom: 24 }}>
-            AI-Powered WhatsApp Chatbot<br />
-            <span style={{ color: '#7C3AED' }}>with ChatGPT</span>
+          <h1 className="text-[34px] md:text-[52px] font-black text-gray-50 tracking-[-2px] mb-5 leading-tight">
+            ChatGPT Meets WhatsApp
           </h1>
-          <p style={{ fontSize: isMobile ? 16 : 19, color: '#9CA3AF', lineHeight: 1.7, maxWidth: 640, margin: '0 auto 36px' }}>
-            Give your WhatsApp chatbot a brain. Powered by GPT-4, AutoChat&apos;s AI chatbot understands context, learns your business, and responds like your best support agent.
+          <p className="text-lg text-gray-400 leading-relaxed">
+            Supercharge your WhatsApp with GPT-4 AI. Smart conversations that understand context, qualify leads, and support customers 24/7.
           </p>
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 14, justifyContent: 'center' }}>
-            <a href="https://app.autochat.in/register" style={{ padding: '15px 32px', background: '#7C3AED', color: '#fff', textDecoration: 'none', borderRadius: 10, fontSize: 16, fontWeight: 800, boxShadow: '0 0 30px rgba(124,58,237,0.4)' }}>
-              🚀 Start Free Trial
-            </a>
-            <a href="mailto:support@autochat.in?subject=Demo Request" style={{ padding: '15px 32px', border: '1.5px solid rgba(255,255,255,0.2)', color: '#F9FAFB', textDecoration: 'none', borderRadius: 10, fontSize: 16, fontWeight: 700 }}>
-              📅 Book a Demo
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* AI Features */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#0B0F14' }}>
-        <div style={W}>
-          <div style={{ textAlign: 'center', marginBottom: 52 }}>
-            <h2 style={{ fontSize: isMobile ? 26 : 38, fontWeight: 800, color: '#F9FAFB', letterSpacing: '-1px', marginBottom: 14 }}>
-              AI Capabilities That Set You Apart
-            </h2>
-            <p style={{ color: '#9CA3AF', fontSize: 17, maxWidth: 540, margin: '0 auto' }}>Not just a chatbot — an AI-powered business assistant trained specifically for your company.</p>
+      {/* How it works */}
+      <section className="section-dark">
+        <div className="container-lg">
+          <div className="text-center mb-14">
+            <h2 className="section-heading">How It Works</h2>
+            <p className="section-subtext">Three steps to AI-powered WhatsApp conversations</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 20 }}>
-            {aiFeatures.map(f => (
-              <div key={f.title} style={{ background: '#111827', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, padding: '28px' }}>
-                <div style={{ fontSize: 36, marginBottom: 16 }}>{f.icon}</div>
-                <h3 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 19, marginBottom: 10 }}>{f.title}</h3>
-                <p style={{ color: '#9CA3AF', fontSize: 15, lineHeight: 1.65 }}>{f.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              ['1️⃣', 'Connect', 'Link your WhatsApp Business account with AutoChat and enable the ChatGPT module.'],
+              ['2️⃣', 'Train', 'Feed your AI with business knowledge — products, FAQs, pricing, policies. It learns your brand voice.'],
+              ['3️⃣', 'Go Live', 'Your AI chatbot starts handling conversations instantly. Monitor, tweak, and let it evolve.'],
+            ].map(([icon, title, desc]) => (
+              <div key={title} className="card-glow-purple text-center p-8">
+                <div className="text-4xl mb-5">{icon}</div>
+                <h3 className="text-gray-50 font-bold text-lg mb-3">{title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
               </div>
             ))}
-            {/* 5th card centered */}
-            <div style={{ gridColumn: isMobile ? 'auto' : '1 / -1', display: 'flex', justifyContent: 'center' }}>
-              <div style={{ background: '#111827', border: '1px solid rgba(124,58,237,0.2)', borderRadius: 16, padding: '28px', maxWidth: 600, width: '100%' }}>
-                <div style={{ fontSize: 36, marginBottom: 16 }}>{aiFeatures[4].icon}</div>
-                <h3 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 19, marginBottom: 10 }}>{aiFeatures[4].title}</h3>
-                <p style={{ color: '#9CA3AF', fontSize: 15, lineHeight: 1.65 }}>{aiFeatures[4].desc}</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Use Cases */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#111827' }}>
-        <div style={W}>
-          <div style={{ textAlign: 'center', marginBottom: 52 }}>
-            <h2 style={{ fontSize: isMobile ? 26 : 38, fontWeight: 800, color: '#F9FAFB', letterSpacing: '-1px', marginBottom: 14 }}>Use Cases</h2>
-            <p style={{ color: '#9CA3AF', fontSize: 17 }}>How businesses use AutoChat AI to grow</p>
+      <section className="section-card">
+        <div className="container-lg">
+          <div className="text-center mb-14">
+            <h2 className="section-heading">What Your AI Can Do</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: 20 }}>
-            {useCases.map(u => (
-              <div key={u.title} style={{ background: '#0B0F14', borderRadius: 16, padding: '28px 22px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div style={{ fontSize: 36, marginBottom: 16 }}>{u.icon}</div>
-                <h3 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 17, marginBottom: 10 }}>{u.title}</h3>
-                <p style={{ color: '#9CA3AF', fontSize: 14, lineHeight: 1.65 }}>{u.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {[
+              ['💬', 'Intelligent Conversations', 'Your AI understands context, remembers conversation history, and responds naturally — just like a human agent.'],
+              ['🎯', 'Lead Qualification', 'Automatically qualify leads by asking the right questions, scoring responses, and routing hot leads to your sales team.'],
+              ['📚', 'Instant FAQ Answers', 'Train your AI on your knowledge base. It answers customer questions instantly, reducing support tickets by up to 80%.'],
+              ['🌍', 'Multi-Language Support', 'Communicate with customers in their preferred language. GPT-4 supports 90+ languages out of the box.'],
+              ['🔄', 'Smart Handoff', 'AI handles routine queries. When things get complex, it seamlessly transfers to a human agent with full context.'],
+              ['📈', 'Continuous Learning', 'Your AI improves over time. Review conversations, add corrections, and watch response quality climb.'],
+            ].map(([icon, title, desc]) => (
+              <div key={title} className="group flex gap-5 bg-dark rounded-2xl p-7 border border-white/[0.07] hover:border-purple-600/20 transition-all duration-300">
+                <div className="w-12 h-12 bg-purple-600/10 rounded-xl flex items-center justify-center text-2xl shrink-0 group-hover:bg-purple-600/20 transition-colors duration-300">{icon}</div>
+                <div>
+                  <h3 className="text-gray-50 font-bold text-[16px] mb-2">{title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#0B0F14' }}>
-        <div style={{ ...W, textAlign: 'center', maxWidth: 760 }}>
-          <h2 style={{ fontSize: isMobile ? 26 : 38, fontWeight: 800, color: '#F9FAFB', letterSpacing: '-1px', marginBottom: 48 }}>
-            Get Your AI Chatbot Live in 3 Steps
-          </h2>
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 20 }}>
-            {[
-              { step: '01', title: 'Connect Your Data', desc: 'Upload FAQs, product info, and business documents. The AI learns your business instantly.' },
-              { step: '02', title: 'Train & Customize', desc: 'Set personality, tone, and escalation rules. Preview how the AI responds to real questions.' },
-              { step: '03', title: 'Deploy & Scale', desc: 'Go live on WhatsApp. Watch the AI handle thousands of conversations simultaneously.' },
-            ].map(s => (
-              <div key={s.step} style={{ flex: 1, background: '#111827', borderRadius: 16, padding: '28px 24px', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div style={{ fontSize: 36, fontWeight: 900, color: '#7C3AED', marginBottom: 12, opacity: 0.7 }}>{s.step}</div>
-                <h3 style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 18, marginBottom: 10 }}>{s.title}</h3>
-                <p style={{ color: '#9CA3AF', fontSize: 14, lineHeight: 1.65 }}>{s.desc}</p>
-              </div>
-            ))}
+      {/* Chat Demo */}
+      <section className="section-dark">
+        <div className="container-lg grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <div className="tag-purple">Live Example</div>
+            <h2 className="section-heading leading-tight mb-5">See AI in Action</h2>
+            <p className="text-gray-400 text-[16px] leading-relaxed mb-6">
+              Your AI chatbot handles complex queries, understands intent, and provides accurate responses — just like your best support agent, but available 24/7.
+            </p>
+            <a href="https://app.autochat.in/register" className="btn-primary">Try It Free →</a>
           </div>
-          <div style={{ marginTop: 48 }}>
-            <a href="https://app.autochat.in/register" style={{ display: 'inline-block', padding: '14px 36px', background: '#7C3AED', color: '#fff', textDecoration: 'none', borderRadius: 10, fontSize: 16, fontWeight: 800, boxShadow: '0 0 30px rgba(124,58,237,0.35)' }}>
-              Start Building Your AI Chatbot →
-            </a>
+          <div className="card-glow-purple rounded-2xl p-6 md:p-8">
+            <div className="bg-dark rounded-xl p-5 space-y-3">
+              <div className="text-purple-400 font-bold text-sm mb-4 flex items-center gap-2">🧠 AI-Powered Chat</div>
+              <div className="bg-purple-600/80 rounded-2xl rounded-bl-sm px-4 py-3 text-white text-[13px] max-w-[80%]">
+                What are your pricing plans?
+              </div>
+              <div className="bg-dark-700 rounded-2xl rounded-br-sm px-4 py-3 text-gray-100 text-[13px] ml-auto max-w-[85%]">
+                Great question! We have 3 plans:<br /><br />
+                💰 <strong>Starter</strong> — $50/mo<br />
+                🚀 <strong>Growth</strong> — $100/mo<br />
+                🏢 <strong>Enterprise</strong> — $350/mo<br /><br />
+                All include a 3-day free trial. Want me to help you pick the right one?
+              </div>
+              <div className="bg-purple-600/80 rounded-2xl rounded-bl-sm px-4 py-3 text-white text-[13px] max-w-[80%]">
+                I have a team of 15 agents
+              </div>
+              <div className="bg-dark-700 rounded-2xl rounded-br-sm px-4 py-3 text-gray-100 text-[13px] ml-auto max-w-[85%]">
+                For 15 agents, the <strong>Growth plan ($100/mo)</strong> is perfect — it supports up to 20 agents! 🎯<br /><br />
+                Shall I sign you up for a free trial?
+              </div>
+            </div>
           </div>
         </div>
       </section>

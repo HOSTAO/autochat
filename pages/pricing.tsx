@@ -1,7 +1,7 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { useIsMobile } from '../hooks/useIsMobile'
 
 const plans = [
   {
@@ -9,9 +9,9 @@ const plans = [
     price: '$50',
     period: '/mo',
     popular: false,
-    color: '#25D366',
+    tagline: 'Perfect for small businesses',
     features: [
-      '1,000 Free Conversations included',
+      '1,000 Free Conversations/mo',
       '5 User Agents',
       '20,000 Conversations/month',
       '1 Chatbot',
@@ -22,23 +22,23 @@ const plans = [
       'Text & Voice AI',
       '100K Contacts',
       'Custom Integration',
-      'Support',
+      'Email Support',
       'Review Management',
     ],
   },
   {
-    name: 'Medium',
+    name: 'Growth',
     price: '$100',
     period: '/mo',
     popular: true,
-    color: '#7C3AED',
+    tagline: 'Best for growing teams',
     features: [
-      '1,000 Free Conversations included',
+      '1,000 Free Conversations/mo',
       '20 User Agents',
       '50,000 Conversations/month',
       '20 Chatbots',
       'Everything in Starter',
-      'Advanced Integration',
+      'Advanced Integrations',
       'Priority Support',
       'Team Collaboration Tools',
       'Advanced Analytics',
@@ -46,13 +46,13 @@ const plans = [
     ],
   },
   {
-    name: 'Premium',
+    name: 'Enterprise',
     price: '$350',
     period: '/mo',
     popular: false,
-    color: '#F59E0B',
+    tagline: 'For large-scale operations',
     features: [
-      '1,000 Free Conversations included',
+      '1,000 Free Conversations/mo',
       '100 User Agents',
       '100,000 Conversations/month',
       '100 Chatbots',
@@ -67,120 +67,142 @@ const plans = [
   },
 ]
 
+const faqs = [
+  { q: 'Is there a free trial?', a: 'Yes! All plans include a 3-day free trial. No credit card required to get started.' },
+  { q: 'What are the Meta WhatsApp API charges?', a: 'Meta charges separately for conversations over and above 1,000/month. These rates vary by country and conversation type. AutoChat\'s subscription fee covers platform access; Meta charges cover actual message delivery.' },
+  { q: 'Can I upgrade or downgrade my plan?', a: 'Absolutely. You can change your plan at any time from your dashboard. Upgrades take effect immediately; downgrades at the next billing cycle.' },
+  { q: 'Do I need technical skills to get started?', a: 'No! AutoChat is designed for non-technical users. Our drag-and-drop chatbot builder and intuitive dashboard require zero coding knowledge.' },
+]
+
 export default function Pricing() {
-  const isMobile = useIsMobile()
-  const W = { maxWidth: 1200, margin: '0 auto', padding: '0 24px' }
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   return (
     <>
       <Head>
         <title>Pricing | AutoChat — WhatsApp Business Automation</title>
-        <meta name="description" content="AutoChat pricing plans starting at $50/mo. Starter, Medium, and Premium plans for WhatsApp Business automation. Try free for 3 days." />
+        <meta name="description" content="AutoChat pricing plans starting at $50/mo. Starter, Growth, and Enterprise plans for WhatsApp Business automation. Try free for 3 days." />
         <link rel="canonical" href="https://autochat.in/pricing" />
         <meta property="og:title" content="Pricing | AutoChat — WhatsApp Business Automation" />
         <meta property="og:description" content="Simple, transparent pricing. Start at $50/mo. 3-day free trial included." />
         <meta property="og:url" content="https://autochat.in/pricing" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Nav />
 
       {/* Hero */}
-      <section style={{ background: 'linear-gradient(135deg, #0B0F14 0%, #0d1f17 50%, #0B0F14 100%)', padding: isMobile ? '72px 24px 60px' : '100px 24px 80px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 680, margin: '0 auto' }}>
-          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 900, color: '#F9FAFB', letterSpacing: '-1.5px', marginBottom: 20 }}>
-            Simple, Transparent Pricing
+      <section className="hero-gradient py-20 px-6 md:py-28 text-center">
+        <div className="max-w-[700px] mx-auto">
+          <div className="badge mb-5">
+            <span>💰 Simple Pricing</span>
+          </div>
+          <h1 className="text-[34px] md:text-[52px] font-black text-gray-50 tracking-[-2px] mb-5 leading-tight">
+            Plans That Scale With You
           </h1>
-          <p style={{ fontSize: 17, color: '#9CA3AF', lineHeight: 1.7 }}>
-            Start free for 3 days. No credit card required. Scale as you grow.
+          <p className="text-lg text-gray-400 leading-relaxed mb-6">
+            Start free for 3 days. No credit card required. Upgrade when you&apos;re ready.
           </p>
-          <div style={{ marginTop: 20, padding: '12px 20px', background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 10, display: 'inline-block' }}>
-            <p style={{ color: '#F59E0B', fontSize: 14, fontWeight: 600, margin: 0 }}>
-              ⚠️ All plans shown at Official Price +. Meta WhatsApp API charges apply separately based on conversation volume.
+          <div className="inline-block px-5 py-3 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+            <p className="text-amber-400 text-sm font-medium">
+              ⚠️ Meta WhatsApp API charges apply separately based on conversation volume
             </p>
           </div>
         </div>
       </section>
 
       {/* Plans */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#0B0F14' }}>
-        <div style={W}>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 24, alignItems: 'start' }}>
+      <section className="section-dark -mt-4">
+        <div className="container-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {plans.map(plan => (
-              <div key={plan.name} style={{
-                background: '#111827',
-                border: plan.popular ? `2px solid ${plan.color}` : '1px solid rgba(255,255,255,0.07)',
-                borderRadius: 20, padding: '32px 28px',
-                position: 'relative',
-                boxShadow: plan.popular ? `0 0 40px ${plan.color}22` : 'none',
-              }}>
+              <div key={plan.name}
+                className={`relative flex flex-col bg-dark-card rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${
+                  plan.popular
+                    ? 'border-2 border-brand shadow-[0_0_40px_rgba(37,211,102,0.12)] md:scale-105'
+                    : 'border border-white/[0.07]'
+                }`}
+              >
                 {plan.popular && (
-                  <div style={{
-                    position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)',
-                    background: plan.color, color: '#fff', fontSize: 12, fontWeight: 800,
-                    padding: '4px 16px', borderRadius: 20, whiteSpace: 'nowrap',
-                    letterSpacing: '0.5px',
-                  }}>MOST POPULAR</div>
+                  <div className="bg-brand text-white text-center text-xs font-extrabold py-2 tracking-wider uppercase">
+                    Most Popular
+                  </div>
                 )}
-                <div style={{ marginBottom: 24 }}>
-                  <h3 style={{ color: '#F9FAFB', fontWeight: 800, fontSize: 22, marginBottom: 8 }}>{plan.name}</h3>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginBottom: 4 }}>
-                    <span style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 600, marginBottom: 2 }}>Official Price +</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
-                    <span style={{ fontSize: 48, fontWeight: 900, color: plan.color, letterSpacing: '-2px' }}>{plan.price}</span>
-                    <span style={{ fontSize: 16, color: '#9CA3AF', fontWeight: 600 }}>{plan.period}</span>
-                  </div>
-                </div>
-
-                <a href="https://app.autochat.in/register" style={{
-                  display: 'block', textAlign: 'center', padding: '13px',
-                  background: plan.popular ? plan.color : 'transparent',
-                  border: `2px solid ${plan.color}`,
-                  color: plan.popular ? '#fff' : plan.color,
-                  textDecoration: 'none', borderRadius: 10, fontSize: 15, fontWeight: 800,
-                  marginBottom: 28,
-                }}>Sign Up</a>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {plan.features.map(f => (
-                    <div key={f} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: '#9CA3AF', fontSize: 14 }}>
-                      <span style={{ color: plan.color, flexShrink: 0, marginTop: 1 }}>✓</span>
-                      {f}
+                
+                <div className="p-7 md:p-8 flex-1 flex flex-col">
+                  <div className="mb-7">
+                    <h3 className="text-gray-50 font-extrabold text-2xl mb-1">{plan.name}</h3>
+                    <p className="text-gray-500 text-sm mb-5">{plan.tagline}</p>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className={`text-5xl font-black tracking-[-2px] ${plan.popular ? 'text-brand' : 'text-gray-50'}`}>
+                        {plan.price}
+                      </span>
+                      <span className="text-gray-500 text-base font-medium">{plan.period}</span>
                     </div>
-                  ))}
+                    <p className="text-gray-600 text-xs mt-2">+ Meta API charges</p>
+                  </div>
+
+                  <a href="https://app.autochat.in/register"
+                    className={`block text-center py-3.5 rounded-xl text-[15px] font-extrabold no-underline transition-all duration-300 hover:-translate-y-0.5 mb-7 ${
+                      plan.popular
+                        ? 'bg-brand text-white shadow-[0_0_25px_rgba(37,211,102,0.3)] hover:shadow-[0_0_40px_rgba(37,211,102,0.5)]'
+                        : 'border-2 border-white/20 text-gray-50 hover:border-white/40 hover:bg-white/[0.03]'
+                    }`}
+                  >
+                    Start Free Trial
+                  </a>
+
+                  <div className="flex-1 flex flex-col gap-3.5">
+                    {plan.features.map(f => (
+                      <div key={f} className="flex gap-3 items-start text-sm">
+                        <span className={`shrink-0 mt-0.5 ${plan.popular ? 'text-brand' : 'text-gray-500'}`}>✓</span>
+                        <span className="text-gray-300">{f}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Meta note */}
-          <div style={{ marginTop: 40, textAlign: 'center', padding: '20px', background: '#111827', borderRadius: 14, border: '1px solid rgba(255,255,255,0.07)' }}>
-            <p style={{ color: '#9CA3AF', fontSize: 14, lineHeight: 1.7, maxWidth: 700, margin: '0 auto' }}>
-              <strong style={{ color: '#F9FAFB' }}>Note on WhatsApp API Charges:</strong> Meta charges separately for WhatsApp Business API conversations. These fees are in addition to your AutoChat subscription and vary by country and conversation type (marketing, utility, service). The first 1,000 conversations/month from Meta are free.
+          <div className="card mt-12 text-center">
+            <p className="text-gray-400 text-sm leading-relaxed max-w-[700px] mx-auto">
+              <strong className="text-gray-200">Note:</strong> Meta charges separately for WhatsApp Business API conversations. The first 1,000 conversations/month are free from Meta. Additional charges vary by country and conversation type.
             </p>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#111827' }}>
-        <div style={{ maxWidth: 760, margin: '0 auto', padding: '0 24px' }}>
-          <h2 style={{ fontSize: isMobile ? 26 : 36, fontWeight: 800, color: '#F9FAFB', letterSpacing: '-1px', marginBottom: 36, textAlign: 'center' }}>
-            Frequently Asked Questions
-          </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {[
-              { q: 'Is there a free trial?', a: 'Yes! All plans include a 3-day free trial. No credit card required to get started.' },
-              { q: 'What are the Meta WhatsApp API charges?', a: 'Meta charges separately for conversations over and above 1,000/month. These rates vary by country and conversation type. AutoChat\'s subscription fee covers platform access; Meta charges cover actual message delivery.' },
-              { q: 'Can I upgrade or downgrade my plan?', a: 'Absolutely. You can change your plan at any time from your dashboard. Upgrades take effect immediately; downgrades at the next billing cycle.' },
-              { q: 'Do I need technical skills to get started?', a: 'No! AutoChat is designed for non-technical users. Our drag-and-drop chatbot builder and intuitive dashboard require zero coding knowledge.' },
-            ].map(faq => (
-              <div key={faq.q} style={{ background: '#0B0F14', borderRadius: 12, padding: '20px 24px', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div style={{ color: '#F9FAFB', fontWeight: 700, fontSize: 16, marginBottom: 8 }}>{faq.q}</div>
-                <div style={{ color: '#9CA3AF', fontSize: 14, lineHeight: 1.65 }}>{faq.a}</div>
+      <section className="section-card">
+        <div className="max-w-[760px] mx-auto px-6">
+          <h2 className="section-heading text-center mb-10">Common Questions</h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div key={faq.q} className="bg-dark border border-white/[0.07] rounded-xl overflow-hidden hover:border-white/[0.12] transition-colors duration-200">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer bg-transparent border-none"
+                >
+                  <span className="text-gray-50 font-semibold text-[15px] pr-6">{faq.q}</span>
+                  <span className={`text-gray-400 text-lg shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
+                </button>
+                <div className={`grid transition-all duration-300 ease-out ${openFaq === i ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                  <div className="overflow-hidden">
+                    <div className="px-6 pb-5 text-gray-400 text-sm leading-relaxed">{faq.a}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-dark text-center">
+        <div className="max-w-[500px] mx-auto px-6">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-50 mb-4">Still have questions?</h2>
+          <p className="text-gray-400 mb-8">Our team is here to help. Get in touch and we&apos;ll get back to you within 24 hours.</p>
+          <a href="/contact" className="btn-primary">Contact Us →</a>
         </div>
       </section>
 

@@ -1,196 +1,57 @@
 import Head from 'next/head'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { useIsMobile } from '../hooks/useIsMobile'
 
 const features = [
-  {
-    icon: '🤖',
-    title: 'No Code Chatbot Builder',
-    desc: 'Build sophisticated WhatsApp chatbots visually with our drag-and-drop interface. No programming skills required.',
-    bullets: [
-      'Drag & drop flow builder',
-      'Conditional logic & branching',
-      'Multi-language support',
-      'Media message support (images, videos, docs)',
-      'Interactive buttons & list menus',
-      'Product catalog integration',
-    ],
-  },
-  {
-    icon: '👥',
-    title: 'Team Inbox / Multi-Agent',
-    desc: 'Manage all WhatsApp conversations in one unified inbox. Assign chats to agents, track performance, and collaborate.',
-    bullets: [
-      'Unlimited agent seats (per plan)',
-      'Chat assignment & reassignment',
-      'Agent performance analytics',
-      'Internal notes & team chat',
-      'Mobile app for agents on the go',
-      'Override bot with live agent',
-    ],
-  },
-  {
-    icon: '📨',
-    title: 'Bulk Messaging & Broadcast',
-    desc: 'Reach thousands of customers instantly with targeted WhatsApp broadcasts. Perfect for promotions and announcements.',
-    bullets: [
-      'Send to unlimited contacts',
-      'Schedule broadcasts',
-      'Message templates (pre-approved)',
-      'Delivery & read receipts',
-      'Segmented audience targeting',
-      'Campaign analytics',
-    ],
-  },
-  {
-    icon: '🛒',
-    title: 'WhatsApp eCommerce',
-    desc: 'Transform WhatsApp into a full-featured sales channel. Let customers browse, order, and pay without leaving the app.',
-    bullets: [
-      'Shopify & WooCommerce integration',
-      'Automated checkout flow',
-      'Abandoned cart recovery',
-      'Product catalog messaging',
-      'Order tracking updates',
-      'Payment gateway integration',
-    ],
-  },
-  {
-    icon: '✨',
-    title: 'ChatGPT / AI Integration',
-    desc: 'Power your chatbot with GPT-4 AI. Train on your business data and provide intelligent, human-like responses.',
-    bullets: [
-      'GPT-4 powered responses',
-      'Train on your own data',
-      'Voice & text AI conversation',
-      'Context-aware replies',
-      'Lead qualification automation',
-      'FAQ auto-resolution',
-    ],
-  },
-  {
-    icon: '✅',
-    title: 'Green Tick Verification',
-    desc: 'Get your business officially verified on WhatsApp with the coveted green tick badge.',
-    bullets: [
-      'Official WhatsApp Business Account',
-      'Green tick verification mark',
-      'Brand protection from impersonation',
-      'Setup in as little as 2 business days',
-      'Expert guidance throughout',
-      'Ongoing compliance support',
-    ],
-  },
-  {
-    icon: '🔌',
-    title: 'API & Webhooks',
-    desc: 'Connect AutoChat to any platform with our powerful REST API and real-time webhooks.',
-    bullets: [
-      'Full REST API access',
-      'Real-time webhook events',
-      'Send & receive messages via API',
-      'Contact management API',
-      'Sandbox environment for testing',
-      'Comprehensive documentation',
-    ],
-  },
-  {
-    icon: '📊',
-    title: 'CRM Integration',
-    desc: 'Sync your WhatsApp conversations with your CRM for a complete view of every customer.',
-    bullets: [
-      'HubSpot, Salesforce, Zoho support',
-      'Contact sync & enrichment',
-      'Deal/pipeline management',
-      'Custom field mapping',
-      'Activity logging',
-      'Lead capture automation',
-    ],
-  },
-  {
-    icon: '📈',
-    title: 'Analytics & Reports',
-    desc: 'Get deep insights into your WhatsApp performance with real-time dashboards and reports.',
-    bullets: [
-      'Message delivery & open rates',
-      'Chatbot conversation analytics',
-      'Agent performance reports',
-      'Campaign ROI tracking',
-      'Export to CSV/Excel',
-      'Custom date range filters',
-    ],
-  },
-  {
-    icon: '💳',
-    title: 'Payment Gateway Integration',
-    desc: 'Accept payments directly in WhatsApp. Integrated with leading payment providers.',
-    bullets: [
-      'Stripe & PayPal support',
-      'Razorpay, Paytm (India)',
-      'Secure payment links in chat',
-      'Automated receipts',
-      'Refund management',
-      'Multi-currency support',
-    ],
-  },
+  { icon: '🤖', title: 'No-Code Chatbot Builder', desc: 'Design powerful chatbots with our visual drag-and-drop builder. No programming required. Set up autoresponders, lead qualification flows, and FAQ bots in minutes.', tag: 'Automation' },
+  { icon: '🛒', title: 'WhatsApp eCommerce', desc: 'Let customers browse products, add to cart, and checkout — all inside WhatsApp. Integrates with Shopify, WooCommerce, and custom stores.', tag: 'Commerce' },
+  { icon: '📨', title: 'Bulk Messaging', desc: 'Send marketing campaigns, promotions, and updates to thousands of customers with a single click. Smart segmentation and personalization built in.', tag: 'Marketing' },
+  { icon: '👥', title: 'Team Inbox', desc: 'Multiple agents handling one WhatsApp number. Smart routing, assignment, CRM notes, tags, and performance tracking — all in a WhatsApp-like interface.', tag: 'Support' },
+  { icon: '🧠', title: 'ChatGPT AI Integration', desc: 'Harness the power of GPT-4 to automate intelligent conversations. Your chatbot can understand context, answer complex questions, and learn from interactions.', tag: 'AI' },
+  { icon: '📊', title: 'Analytics & Reporting', desc: 'Track message delivery, response times, agent performance, and campaign ROI. Beautiful dashboards with actionable insights.', tag: 'Analytics' },
+  { icon: '🔗', title: 'API & Webhooks', desc: 'Connect AutoChat with any system using our powerful REST API and real-time webhooks. Build custom integrations effortlessly.', tag: 'Developer' },
+  { icon: '✅', title: 'Green Tick Verification', desc: 'We help you get the official WhatsApp green tick verification badge. Build trust and credibility with your customers.', tag: 'Trust' },
+  { icon: '🔔', title: 'Notifications at Scale', desc: 'Send transactional updates — order confirmations, shipping alerts, appointment reminders — instantly to thousands.', tag: 'Notifications' },
+  { icon: '💳', title: 'Payment Gateways', desc: 'Accept payments directly through WhatsApp. Integrate Stripe, Razorpay, PayPal, and more for seamless in-chat checkout.', tag: 'Payments' },
+  { icon: '🔄', title: 'Abandoned Cart Recovery', desc: 'Automatically send personalized WhatsApp messages to recover lost sales. Smart timing and follow-up sequences.', tag: 'Commerce' },
+  { icon: '📱', title: 'Mobile & Web App', desc: 'Access AutoChat from anywhere. Our responsive web app and mobile interface give your team full control on the go.', tag: 'Platform' },
 ]
 
 export default function Features() {
-  const isMobile = useIsMobile()
-  const W = { maxWidth: 1200, margin: '0 auto', padding: '0 24px' }
-
   return (
     <>
       <Head>
-        <title>Features | AutoChat — WhatsApp Business Automation</title>
-        <meta name="description" content="Explore AutoChat's full feature set: chatbot builder, team inbox, bulk messaging, WhatsApp eCommerce, ChatGPT AI integration, analytics, and more." />
+        <title>Features | AutoChat — WhatsApp Business Automation Platform</title>
+        <meta name="description" content="Explore AutoChat's powerful features: chatbot builder, bulk messaging, team inbox, WhatsApp eCommerce, ChatGPT AI, analytics, and more." />
         <link rel="canonical" href="https://autochat.in/features" />
-        <meta property="og:title" content="Features | AutoChat — WhatsApp Business Automation" />
-        <meta property="og:description" content="Complete WhatsApp Business automation features: chatbots, AI, eCommerce, team inbox, bulk messaging, and more." />
-        <meta property="og:url" content="https://autochat.in/features" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Nav />
 
-      {/* Hero */}
-      <section style={{ background: 'linear-gradient(135deg, #0B0F14 0%, #0d1f17 50%, #0B0F14 100%)', padding: isMobile ? '72px 24px 60px' : '100px 24px 80px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <div style={{ display: 'inline-block', background: 'rgba(37,211,102,0.12)', color: '#25D366', fontSize: 13, fontWeight: 700, borderRadius: 6, padding: '4px 14px', marginBottom: 24 }}>All Features</div>
-          <h1 style={{ fontSize: isMobile ? 32 : 52, fontWeight: 900, color: '#F9FAFB', letterSpacing: '-1.5px', marginBottom: 20 }}>
-            Everything You Need to Win on WhatsApp
+      <section className="hero-gradient py-20 px-6 md:py-28 text-center">
+        <div className="max-w-[700px] mx-auto">
+          <div className="badge mb-5">
+            <span>⚡ Platform Features</span>
+          </div>
+          <h1 className="text-[34px] md:text-[52px] font-black text-gray-50 tracking-[-2px] mb-5 leading-tight">
+            Built for Businesses That Move Fast
           </h1>
-          <p style={{ fontSize: 17, color: '#9CA3AF', lineHeight: 1.7 }}>
-            AutoChat gives you a complete toolkit to automate conversations, sell products, support customers, and grow your business — all through WhatsApp.
+          <p className="text-lg text-gray-400 leading-relaxed">
+            Every feature you need to automate, engage, and grow on WhatsApp — in one powerful platform.
           </p>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#0B0F14' }}>
-        <div style={W}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-            {features.map((f, i) => (
-              <div key={f.title} style={{
-                background: '#111827', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20,
-                padding: isMobile ? '28px' : '36px 40px',
-                display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 32, alignItems: 'start',
-              }}>
-                <div>
-                  <div style={{ fontSize: 40, marginBottom: 16 }}>{f.icon}</div>
-                  <h2 style={{ color: '#F9FAFB', fontWeight: 800, fontSize: isMobile ? 22 : 26, marginBottom: 14 }}>{f.title}</h2>
-                  <p style={{ color: '#9CA3AF', fontSize: 16, lineHeight: 1.7 }}>{f.desc}</p>
+      <section className="section-dark">
+        <div className="container-lg">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            {features.map(f => (
+              <div key={f.title} className="group card hover:shadow-xl p-7">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="text-4xl group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
+                  <span className="bg-brand/10 text-brand text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">{f.tag}</span>
                 </div>
-                <div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {f.bullets.map(b => (
-                      <div key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: '#9CA3AF', fontSize: 15 }}>
-                        <span style={{ color: '#25D366', fontSize: 16, flexShrink: 0, marginTop: 1 }}>✓</span>
-                        {b}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <h3 className="text-gray-50 font-bold text-lg mb-3">{f.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -198,13 +59,16 @@ export default function Features() {
       </section>
 
       {/* CTA */}
-      <section style={{ padding: isMobile ? '60px 24px' : '80px 24px', background: '#111827', textAlign: 'center' }}>
-        <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <h2 style={{ fontSize: isMobile ? 28 : 40, fontWeight: 800, color: '#F9FAFB', letterSpacing: '-1px', marginBottom: 16 }}>Ready to Get Started?</h2>
-          <p style={{ color: '#9CA3AF', fontSize: 17, marginBottom: 32 }}>Try AutoChat free for 3 days. No credit card required.</p>
-          <a href="https://app.autochat.in/register" style={{ display: 'inline-block', padding: '14px 36px', background: '#25D366', color: '#fff', textDecoration: 'none', borderRadius: 10, fontSize: 16, fontWeight: 800, boxShadow: '0 0 30px rgba(37,211,102,0.3)' }}>
-            Start 3-Days Free Trial →
-          </a>
+      <section className="section-card text-center">
+        <div className="max-w-[550px] mx-auto px-6">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-50 tracking-tight mb-5">
+            Ready to Get Started?
+          </h2>
+          <p className="text-gray-400 text-base mb-8">Experience all features with our 3-day free trial. No credit card required.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://app.autochat.in/register" className="btn-primary">Start Free Trial</a>
+            <a href="/pricing" className="btn-secondary">View Pricing</a>
+          </div>
         </div>
       </section>
 

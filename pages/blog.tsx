@@ -2,14 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { useIsMobile } from '../hooks/useIsMobile'
 import postsData from '../posts-data/posts-clean.json'
-
-const PRIMARY = '#25D366'
-const BG = '#0A0E1A'
-const CARD = '#111827'
-const TEXT = '#F9FAFB'
-const MUTED = '#9CA3AF'
 
 interface Post {
   id: number
@@ -18,45 +11,61 @@ interface Post {
   excerpt: string
   date: string
   categories: string[]
-  content: string
 }
 
-const posts = (postsData as Post[]).slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+export default function Blog() {
+  const posts = (postsData as Post[]).slice(0, 30)
 
-export default function BlogPage() {
-  const isMobile = useIsMobile()
   return (
     <>
       <Head>
-        <title>AutoChat Blog — WhatsApp Automation Tips & Guides</title>
-        <meta name="description" content="Practical guides on WhatsApp Business API, chatbots, automation workflows, and business messaging for Indian businesses." />
-        <meta property="og:title" content="AutoChat Blog — WhatsApp Automation Tips & Guides" />
-        <meta property="og:description" content="Practical guides on WhatsApp Business API, chatbots, and automation." />
+        <title>Blog | AutoChat — WhatsApp Business Tips & Insights</title>
+        <meta name="description" content="Read the latest tips, guides, and insights on WhatsApp Business automation, chatbots, eCommerce, and AI-powered customer engagement." />
+        <link rel="canonical" href="https://autochat.in/blog" />
       </Head>
-      <div style={{ background: BG, minHeight: '100vh', color: TEXT }}>
-        <Nav />
-        <div style={{ maxWidth: 900, margin: '0 auto', padding: isMobile ? '80px 20px 60px' : '100px 24px 80px' }}>
-          <h1 style={{ fontSize: isMobile ? 28 : 40, fontWeight: 800, color: TEXT, marginBottom: 8 }}>AutoChat Blog</h1>
-          <p style={{ color: MUTED, fontSize: 16, marginBottom: 48 }}>WhatsApp automation guides, business messaging tips, and API tutorials.</p>
-          <div style={{ display: 'grid', gap: 24 }}>
-            {posts.map(post => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
-                <div style={{ background: CARD, borderRadius: 12, padding: isMobile ? 20 : 28, border: '1px solid #1F2937', cursor: 'pointer', transition: 'border-color 0.2s' }}>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
-                    {(post.categories || []).slice(0, 2).map(cat => (
-                      <span key={cat} style={{ background: PRIMARY + '22', color: PRIMARY, fontSize: 12, fontWeight: 600, padding: '3px 10px', borderRadius: 20 }}>{cat}</span>
-                    ))}
-                  </div>
-                  <h2 style={{ fontSize: isMobile ? 17 : 20, fontWeight: 700, color: TEXT, marginBottom: 10, lineHeight: 1.4 }}>{post.title}</h2>
-                  <p style={{ color: MUTED, fontSize: 14, lineHeight: 1.6, marginBottom: 14 }}>{post.excerpt}</p>
-                  <span style={{ color: MUTED, fontSize: 13 }}>{new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+      <Nav />
+
+      <section className="hero-gradient py-16 px-6 md:py-24 text-center">
+        <div className="max-w-[600px] mx-auto">
+          <h1 className="text-[34px] md:text-[48px] font-black text-gray-50 tracking-[-1.5px] mb-4">Blog</h1>
+          <p className="text-gray-400 text-lg leading-relaxed">Tips, guides, and insights on WhatsApp Business automation.</p>
         </div>
-        <Footer />
-      </div>
+      </section>
+
+      <section className="section-dark">
+        <div className="container-lg">
+          {posts.length === 0 ? (
+            <div className="card text-center p-12">
+              <div className="text-4xl mb-4">📝</div>
+              <h2 className="text-gray-50 font-bold text-xl mb-3">Coming Soon</h2>
+              <p className="text-gray-400">We&apos;re working on great content. Check back soon!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {posts.map(post => (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="no-underline group">
+                  <div className="card h-full flex flex-col group-hover:border-brand/20 group-hover:-translate-y-0.5 transition-all duration-300">
+                    {post.categories?.[0] && (
+                      <span className="inline-block bg-brand/10 text-brand text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 self-start">
+                        {post.categories[0]}
+                      </span>
+                    )}
+                    <h3 className="text-gray-50 font-bold text-[17px] mb-3 group-hover:text-brand transition-colors duration-200 leading-snug">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                    <div className="text-gray-600 text-xs">{post.date}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <Footer />
     </>
   )
 }
