@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import NewsletterSection from './NewsletterSection'
 
 export default function Footer() {
   return (
@@ -107,6 +108,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <NewsletterSection />
 
       {/* Bottom Bar */}
       <div className="border-t border-white/[0.07]">
